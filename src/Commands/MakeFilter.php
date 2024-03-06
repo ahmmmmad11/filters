@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Ahmmmmad11\Filters\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Database\Eloquent\Model;
@@ -70,11 +70,6 @@ class MakeFilter extends GeneratorCommand
     protected function getDefaultNamespace($rootNamespace): string
     {
         return $rootNamespace.'\Http\Filters';
-    }
-
-    protected function filterStubFile(): string
-    {
-        return __DIR__.'/Stubs/filter.stub';
     }
 
     protected function getStub(): string
