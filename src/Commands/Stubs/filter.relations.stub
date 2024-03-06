@@ -5,21 +5,19 @@ namespace {{ namespace }};
 use {{ rootNamespace }}Http\Filters\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use {{ namespacedModel }};
+use Ahmmmmad11\Filters\Filter;
 
 class {{ class }} extends Filter
 {
     public function filter(): Filter
     {
-        $builder = QueryBuilder::for({{ model }})
+        $this->data = QueryBuilder::for({{ model }})
             ->allowedFilters(
                 {{ fields }}
             )
             ->allowedIncludes(
                 {{ relations }}
-            )
-            ;
-
-        $this->data = $builder;
+            );
 
         return $this;
     }
