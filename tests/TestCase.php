@@ -2,9 +2,9 @@
 
 namespace Ahmmmmad11\Filters\Tests;
 
+use ahmmmmad11\Filters\FiltersServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ahmmmmad11\Filters\FiltersServiceProvider;
 
 class TestCase extends Orchestra
 {

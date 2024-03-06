@@ -2,12 +2,11 @@
 
 namespace ahmmmmad11\Filters;
 
-
 abstract class Filter
 {
     protected object|array|null $data = null;
 
-    public abstract function filter(): self;
+    abstract public function filter(): self;
 
     public function load(): void
     {

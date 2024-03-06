@@ -5,11 +5,12 @@ namespace Ahmmmmad11\Filters\Commands;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Schema;
 use InvalidArgumentException;
+use ReflectionMethod;
 use SplFileObject;
 use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Support\Facades\Schema;
-use ReflectionMethod;
+
 use function Laravel\Prompts\confirm;
 
 class MakeFilter extends GeneratorCommand
@@ -65,7 +66,6 @@ class MakeFilter extends GeneratorCommand
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
-     * @return string
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
@@ -89,9 +89,6 @@ class MakeFilter extends GeneratorCommand
 
     /**
      * Resolve the fully-qualified path to the stub.
-     *
-     * @param  string  $stub
-     * @return string
      */
     protected function resolveStubPath(string $stub): string
     {
@@ -110,7 +107,7 @@ class MakeFilter extends GeneratorCommand
             $replace = $this->buildModelReplacements($replace);
         }
 
-        if (!$this->option('ignore-fields')) {
+        if (! $this->option('ignore-fields')) {
             $replace = $this->buildFieldsReplacements($replace);
         }
 
@@ -127,9 +124,6 @@ class MakeFilter extends GeneratorCommand
 
     /**
      * Build the model replacement values.
-     *
-     * @param  array  $replace
-     * @return array
      */
     protected function buildModelReplacements(array $replace): array
     {
@@ -146,8 +140,8 @@ class MakeFilter extends GeneratorCommand
             '{{ namespacedModel }}' => $modelClass,
             '{{namespacedModel}}' => $modelClass,
             'DummyModelClass' => class_basename($modelClass),
-            '{{ model }}' => class_basename($modelClass) .'::class' ,
-            '{{model}}' => class_basename($modelClass) . '::class',
+            '{{ model }}' => class_basename($modelClass).'::class',
+            '{{model}}' => class_basename($modelClass).'::class',
         ]);
     }
 
@@ -159,16 +153,15 @@ class MakeFilter extends GeneratorCommand
         //exclude hidden fields
         $fields = array_diff($all_fields, (new $this->model)->getHidden());
 
-
         return array_merge($replace, [
-            '{{ fields }}' =>  collect(array_values($fields)),
+            '{{ fields }}' => collect(array_values($fields)),
         ]);
     }
 
     protected function buildRelationsReplacements($replace): array
     {
         return array_merge($replace, [
-            '{{ relations }}' =>  $this->getRelations($this->laravel->make($this->model)),
+            '{{ relations }}' => $this->getRelations($this->laravel->make($this->model)),
         ]);
     }
 
@@ -176,7 +169,6 @@ class MakeFilter extends GeneratorCommand
      * Get the fully-qualified model class name.
      *
      * @param  string  $model
-     * @return string
      *
      * @throws \InvalidArgumentException
      */
@@ -191,8 +183,6 @@ class MakeFilter extends GeneratorCommand
 
     /**
      * Get the console command options.
-     *
-     * @return array
      */
     protected function getOptions(): array
     {
@@ -240,5 +230,4 @@ class MakeFilter extends GeneratorCommand
             ->values()
             ->pluck('name');
     }
-
 }
