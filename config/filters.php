@@ -1,6 +1,6 @@
 <?php
 
-// config for ahmmmmad11/Filters
+// config for ahmmmmad11/Filter
 return [
 
 ];
