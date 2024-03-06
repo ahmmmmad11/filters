@@ -1,10 +1,10 @@
 <?php
 
-namespace ahmmmmad11\Filters;
+namespace Ahmmmmad11\Filters;
 
+use Ahmmmmad11\Filters\Commands\MakeFilter;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ahmmmmad11\Filters\Commands\FiltersCommand;
 
 class FiltersServiceProvider extends PackageServiceProvider
 {
@@ -18,6 +18,6 @@ class FiltersServiceProvider extends PackageServiceProvider
         $package
             ->name('filters')
             ->hasConfigFile()
-            ->hasCommand(FiltersCommand::class);
+            ->hasCommand(MakeFilter::class);
     }
 }
