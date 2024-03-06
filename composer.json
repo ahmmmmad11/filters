@@ -1,6 +1,6 @@
 {
     "name": "ahmmmmad11/filters",
-    "description": "A wrapper package over spatie query builder package to simplify filters creation",
+    "description": "A wrapper package over spatie query builder package to simplify filters creation for Laravel Apps",
     "keywords": [
         "Ahmed Mohamed",
         "laravel",
@@ -35,13 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ahmmmmad11\\Filters\\": "src/",
-            "ahmmmmad11\\Filters\\Database\\Factories\\": "database/factories/"
+            "Ahmmmmad11\\Filters\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ahmmmmad11\\Filters\\Tests\\": "tests/",
+            "Ahmmmmad11\\Filters\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -73,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ahmmmmad11\\Filters\\FiltersServiceProvider"
+                "Ahmmmmad11\\Filters\\FiltersServiceProvider"
             ],
             "aliases": {
-                "Filters": "ahmmmmad11\\Filters\\Facades\\Filters"
+                "Filters": "Ahmmmmad11\\Filters\\Facades\\Filters"
             }
         }
     },

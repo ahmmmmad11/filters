@@ -1,0 +1,26 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Filters\Filter;
+use Spatie\QueryBuilder\QueryBuilder;
+use {{ namespacedModel }};
+
+class {{ class }} extends Filter
+{
+    public function filter(): Filter
+    {
+        $builder = QueryBuilder::for({{ model }})
+            ->allowedFilters(
+                {{ fields }}
+            )
+            ->allowedIncludes(
+                {{ relations }}
+            )
+            ;
+
+        $this->data = $builder;
+
+        return $this;
+    }
+}
