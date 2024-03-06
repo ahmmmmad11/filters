@@ -12,9 +12,9 @@ class {{ class }} extends Filter
     public function filter(): Filter
     {
         $this->data = QueryBuilder::for({{ model }})
-            ->allowedFilters([
+            ->allowedFilters(
                 {{ fields }}
-            ]);
+            );
 
         return $this;
     }
