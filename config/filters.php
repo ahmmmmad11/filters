@@ -1,5 +1,15 @@
 <?php
 
 return [
-    "path" => "\Http\Filters"
+
+    /*
+    |--------------------------------------------------------------------------
+    | Filters Path
+    |--------------------------------------------------------------------------
+    |
+    | This value is the path where you filter class be created.
+    |
+    */
+    
+    'path' => '\Http\Filters'
 ];
