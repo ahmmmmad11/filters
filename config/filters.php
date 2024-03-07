@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "path" => "\Http\Filters"
+    'path' => "\Http\Filters",
 ];
