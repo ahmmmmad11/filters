@@ -1,6 +1,5 @@
 <?php
 
-// config for ahmmmmad11/Filter
 return [
-
+    "path" => "\Http\Filters"
 ];

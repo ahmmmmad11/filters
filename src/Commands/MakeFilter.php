@@ -69,7 +69,7 @@ class MakeFilter extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Http\Filters';
+        return $rootNamespace.config('filters.path');
     }
 
     protected function getStub(): string
