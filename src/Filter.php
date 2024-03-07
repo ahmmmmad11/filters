@@ -8,6 +8,9 @@ abstract class Filter
 
     abstract public function filter(): self;
 
+    /**
+     * load model data if not been loaded
+    **/
     public function load(): void
     {
         if (is_null($this->data)) {
@@ -15,6 +18,9 @@ abstract class Filter
         }
     }
 
+    /**
+     * execute custom user logic
+     **/
     public function execute(callable $callable): self
     {
         $this->load();
@@ -24,6 +30,9 @@ abstract class Filter
         return $this;
     }
 
+    /**
+     * get data as pagination
+     **/
     public function paginate($rows = 30)
     {
         $this->load();
@@ -31,6 +40,9 @@ abstract class Filter
         return $this->data?->paginate($rows);
     }
 
+    /**
+     * get all filtered data
+     **/
     public function get()
     {
         $this->load();
