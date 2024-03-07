@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Http\Filters\Filter;
+
 use Spatie\QueryBuilder\QueryBuilder;
 use {{ namespacedModel }};
 use Ahmmmmad11\Filters\Filter;
