@@ -10,7 +10,7 @@ abstract class Filter
 
     /**
      * load model data if not been loaded
-    **/
+     **/
     public function load(): void
     {
         if (is_null($this->data)) {
