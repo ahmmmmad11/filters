@@ -10,6 +10,7 @@ return [
     | This value is the path where you filter class be created.
     |
     */
-    
+
     'path' => '\Http\Filters'
+
 ];
