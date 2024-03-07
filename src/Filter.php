@@ -33,9 +33,15 @@ abstract class Filter
     /**
      * get data as pagination
      **/
-    public function paginate($rows = 30)
+    public function paginate(int $rows = null)
     {
         $this->load();
+
+        // if rows not passed get the value from request
+        $rows??= \request()->get('paginate');
+
+        // fallback to default rows length if rows is null
+        $rows??= config('filters.rows');
 
         return $this->data?->paginate($rows);
     }
