@@ -116,7 +116,7 @@ if you want to assign the size of the pagination form the client side you can do
 ```php
     $filter->paginate();
 
-    // https://example.com/users?paingate=10
+    // https://example.com/users?per_page=10
 ```
 
 > if the `rows` argument of `paginate` method is left empty and no `?paginate` in request query the default row size in `filters.php` config will be used.
