@@ -40,7 +40,7 @@ abstract class Filter
         $this->load();
 
         // if rows not passed get the value from request
-        $rows ??= \request()->get('paginate');
+        $rows ??= \request()->get('per_page');
 
         // fallback to default rows length if rows is null
         $rows ??= config('filters.rows');
