@@ -18,11 +18,10 @@ return [
     | pagination rows
     |--------------------------------------------------------------------------
     |
-    | This value is the rows represents the default pagination size if the
-    | rows' argument is not passed or no paginate query in the request.
+    | This value is the rows represents the default pagination per page.
     |
     */
 
-    'rows' => 100,
+    'per_page' => 100,
 
 ];
