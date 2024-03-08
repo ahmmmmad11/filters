@@ -11,7 +11,7 @@ class {{ class }} extends Filter
 {
     public function filter(): Filter
     {
-        $this->data = QueryBuilder::for({{ model }})
+        $this->query = QueryBuilder::for({{ model }})
             ->allowedFilters(
                 {{ fields }}
             );
