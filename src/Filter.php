@@ -6,7 +6,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class Filter
 {
-    protected QueryBuilder|null $query = null;
+    protected ?QueryBuilder $query = null;
 
     abstract public function filter(): self;
 
