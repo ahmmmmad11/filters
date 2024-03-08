@@ -2,9 +2,11 @@
 
 namespace ahmmmmad11\Filters;
 
+use Spatie\QueryBuilder\QueryBuilder;
+
 abstract class Filter
 {
-    protected object|array|null $data = null;
+    protected QueryBuilder|null $query = null;
 
     abstract public function filter(): self;
 
@@ -13,7 +15,7 @@ abstract class Filter
      **/
     public function load(): void
     {
-        if (is_null($this->data)) {
+        if (is_null($this->query)) {
             $this->filter();
         }
     }
@@ -25,7 +27,7 @@ abstract class Filter
     {
         $this->load();
 
-        $callable($this->data);
+        $callable($this->query);
 
         return $this;
     }
@@ -43,16 +45,16 @@ abstract class Filter
         // fallback to default rows length if rows is null
         $rows ??= config('filters.rows');
 
-        return $this->data?->paginate($rows);
+        return $this->query?->paginate($rows);
     }
 
     /**
      * get all filtered data
      **/
-    public function get()
+    public function get(): \Illuminate\Database\Eloquent\Collection|array|null
     {
         $this->load();
 
-        return $this->data?->get();
+        return $this->query?->get();
     }
 }
