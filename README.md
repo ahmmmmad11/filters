@@ -1,18 +1,9 @@
-# A wraper package over spatie query builder package to simplify filters creation
+# A wrapper package over spatie query builder to quickly scaffold filters.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ahmmmmad11/filters.svg?style=flat-square)](https://packagist.org/packages/ahmmmmad11/filters)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ahmmmmad11/filters/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ahmmmmad11/filters/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ahmmmmad11/filters.svg?style=flat-square)](https://packagist.org/packages/ahmmmmad11/filters)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/filters.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/filters)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -20,13 +11,6 @@ You can install the package via composer:
 
 ```bash
 composer require ahmmmmad11/filters
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filters-migrations"
-php artisan migrate
 ```
 
 You can publish the config file with:
@@ -66,17 +50,15 @@ return [
 
 ## Usage
 
-### create your first filter class
+### create your first filter
 
 ```bash
 php artisan filter:make UsersFilter --model=User
 ```
 
-this will generate `UsersFilter` class at 'app/Http/Filters' directory. you can change the directory where filter classes will be created by changing the `path` value in `filters.php` config file.
+this will generate `UsersFilter` class at 'app/Http/Filters' directory.
 
 ```php
-    // the previous command will generate
-    
     <?php
 
     namespace App\Http\Filters;
@@ -99,7 +81,7 @@ this will generate `UsersFilter` class at 'app/Http/Filters' directory. you can 
     }
 ```
 
-now you can inject this filter in your controller methods like:
+now you can use the filter by injecting `UserFilter` in your controller like:
 
 ```php
 ...
@@ -139,6 +121,22 @@ if you want to assign the size of the pagination form the client side you can do
 
 > if the `rows` argument of `paginate` method is left empty and no `?paginate` in request query the default row size in `filters.php` config will be used.
 
+### Extend Eloquent methods
+you can preform customization over the query directly from you controller method by passing `callback` to `execute` method.
+
+```php
+// UsersController
+
+public function index(UsersFilter $filter)
+{
+    return $filter->execute(function ($query) {
+        $query->where('status', 'active');
+    })->get();
+}
+```
+
+> inside `execute` callback function you can use all eloquent methods.
+
 ### Include relations
 
 to include relations in the filter class just add option `--relations` to filter make command.
@@ -146,9 +144,13 @@ to include relations in the filter class just add option `--relations` to filter
 ```bash
 php artisan filter:make UsersFilter --model=User --relations
 ```
-## Testing
+
+this will generate:
 
 ```php
+
+//UserFilter Class
+
 public function filter(): Filter
     {
         $this->data = QueryBuilder::for(User::class)
@@ -165,6 +167,7 @@ public function filter(): Filter
 
 ## for more details check [Spatie Laravel-query-builder](https://spatie.be/docs/laravel-query-builder/v5/introduction)
 
+## Testing
 
 ```bash
 composer test
