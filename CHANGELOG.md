@@ -2,6 +2,10 @@
 
 All notable changes to `filters` will be documented in this file.
 
+## 0.3.0 - 2024-03-29
+
+Support Laravel 11
+
 ## 0.1.1 - 2024-03-07
 
 First release:
