@@ -2,6 +2,13 @@
 
 All notable changes to `filters` will be documented in this file.
 
+## 0.4.3 - 2024-04-14
+
+- figure out model form filter name (command name argument).
+- shorter `-m` for `--model` option.
+- shorter option `-r` for `--relations` option.
+- enhanced documentation
+
 ## 0.3.0 - 2024-03-29
 
 Support Laravel 11
@@ -24,4 +31,3 @@ Restructuring release:
 ## 0.3.0 - 2024-03-29
 
 Release to support Laravel 11
-
