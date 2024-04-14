@@ -3,16 +3,21 @@
 namespace Ahmmmmad11\Filters\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use ReflectionMethod;
 use SplFileObject;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 use function Laravel\Prompts\confirm;
 
+#[AsCommand(name: 'filter:make')]
 class MakeFilter extends GeneratorCommand
 {
     /**
@@ -20,16 +25,11 @@ class MakeFilter extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'filter:make
-                            {name : The name of the worker}
-                            {--model=}
-                            {--relations}
-                            {--ignore-fields=}
-    ';
+    protected $name = 'filter:make';
 
-    protected $model;
+    protected string $model;
 
-    protected $relationMethods = [
+    protected array $relationMethods = [
         'hasMany',
         'hasManyThrough',
         'hasOneThrough',
@@ -59,7 +59,13 @@ class MakeFilter extends GeneratorCommand
 
     protected function getModel(): string
     {
-        return trim($this->option('model'));
+        if ($this->option('model')) {
+            return trim($this->option('model'));
+        }
+
+        $split_name = Str::ucsplit($this->argument('name'));
+
+        return Str::singular($split_name[0]);
     }
 
     /**
@@ -76,7 +82,7 @@ class MakeFilter extends GeneratorCommand
     {
         $stub = null;
 
-        if ($this->option('model')) {
+        if ($this->getModel()) {
             $stub = '/Stubs/filter.plain.stub';
         }
 
@@ -103,7 +109,7 @@ class MakeFilter extends GeneratorCommand
 
         $replace = [];
 
-        if ($this->option('model')) {
+        if ($this->getModel()) {
             $replace = $this->buildModelReplacements($replace);
         }
 
@@ -115,7 +121,7 @@ class MakeFilter extends GeneratorCommand
             $replace = $this->buildRelationsReplacements($replace);
         }
 
-        $replace["use {$controllerNamespace}\Filter;\n"] = '';
+        $replace["use $controllerNamespace\Filter;\n"] = '';
 
         return str_replace(
             array_keys($replace), array_values($replace), parent::buildClass($name)
@@ -127,9 +133,9 @@ class MakeFilter extends GeneratorCommand
      */
     protected function buildModelReplacements(array $replace): array
     {
-        $modelClass = $this->parseModel($this->option('model'));
+        $modelClass = $this->parseModel($this->getModel());
 
-        if (! class_exists($modelClass) && confirm("A {$modelClass} model does not exist. Do you want to generate it?", default: true)) {
+        if (! class_exists($modelClass) && confirm("A $modelClass model does not exist. Do you want to generate it?", default: true)) {
             $this->call('make:model', ['name' => $modelClass]);
         }
 
@@ -160,19 +166,19 @@ class MakeFilter extends GeneratorCommand
 
     protected function buildRelationsReplacements($replace): array
     {
-        return array_merge($replace, [
-            '{{ relations }}' => $this->getRelations($this->laravel->make($this->model)),
-        ]);
+        try {
+            return array_merge($replace, [
+                '{{ relations }}' => $this->getRelations($this->laravel->make($this->model)),
+            ]);
+        } catch (BindingResolutionException) {
+            return [];
+        }
     }
 
     /**
      * Get the fully-qualified model class name.
-     *
-     * @param  string  $model
-     *
-     * @throws \InvalidArgumentException
      */
-    protected function parseModel($model): string
+    protected function parseModel(string $model): string
     {
         if (preg_match('([^A-Za-z0-9_/\\\\])', $model)) {
             throw new InvalidArgumentException('Model name contains invalid characters.');
@@ -182,19 +188,9 @@ class MakeFilter extends GeneratorCommand
     }
 
     /**
-     * Get the console command options.
-     */
-    protected function getOptions(): array
-    {
-        return [
-            ['model', 'm', InputOption::VALUE_OPTIONAL, 'Generate a resource controller for the given model'],
-        ];
-    }
-
-    /**
      * Get the relations from the given model.
      */
-    protected function getRelations(Model $model): \Illuminate\Support\Collection
+    protected function getRelations(Model $model): Collection
     {
         return collect(get_class_methods($model))
             ->map(fn ($method) => new ReflectionMethod($model, $method))
@@ -229,5 +225,17 @@ class MakeFilter extends GeneratorCommand
             ->filter()
             ->values()
             ->pluck('name');
+    }
+
+    /**
+     * Get the console command options.
+     */
+    protected function getOptions(): array
+    {
+        return [
+            ['model', 'm', InputOption::VALUE_OPTIONAL, 'specify model for the filter'],
+            ['relations', 'r', InputOption::VALUE_NONE, 'include model relations'],
+            ['ignore-fields', 'i', InputOption::VALUE_OPTIONAL, 'exclude fields fields to be filtered by'],
+        ];
     }
 }
