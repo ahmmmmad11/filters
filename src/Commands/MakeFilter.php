@@ -14,6 +14,7 @@ use ReflectionMethod;
 use SplFileObject;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;
+
 use function Laravel\Prompts\confirm;
 
 #[AsCommand(name: 'filter:make')]
@@ -176,10 +177,6 @@ class MakeFilter extends GeneratorCommand
 
     /**
      * Get the fully-qualified model class name.
-     *
-     * @param string $model
-     *
-     * @return string
      */
     protected function parseModel(string $model): string
     {
@@ -230,11 +227,10 @@ class MakeFilter extends GeneratorCommand
             ->pluck('name');
     }
 
-
     /**
      * Get the console command options.
      */
-    protected function getOptions():array
+    protected function getOptions(): array
     {
         return [
             ['model', 'm', InputOption::VALUE_OPTIONAL, 'specify model for the filter'],
@@ -242,5 +238,4 @@ class MakeFilter extends GeneratorCommand
             ['ignore-fields', 'i', InputOption::VALUE_OPTIONAL, 'exclude fields fields to be filtered by'],
         ];
     }
-
 }
