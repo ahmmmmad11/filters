@@ -1,4 +1,4 @@
-# A wrapper package over spatie query builder to quickly scaffold filters.
+# This package serves as a wrapper over the popular spatie query builder. Its primary purpose is to quickly scaffold filters for your application.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ahmmmmad11/filters.svg?style=flat-square)](https://packagist.org/packages/ahmmmmad11/filters)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ahmmmmad11/filters/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ahmmmmad11/filters/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
@@ -13,7 +13,7 @@ You can install the package via composer:
 composer require ahmmmmad11/filters
 ```
 
-You can publish the config file with:
+After installation, you can publish the configuration file using the following command:
 
 ```bash
 php artisan vendor:publish --tag="filters-config"
@@ -39,12 +39,13 @@ return [
     | pagination rows
     |--------------------------------------------------------------------------
     |
-    | This value is the rows represents the default pagination size if the
-    | rows' argument is not passed or no paginate query in the request.
+    | The `per_page` value indicates the default pagination size. 
+    | If the 'per_page' argument is not provided or there is no 
+    | paginate query in the request, this value will be used.
     |
     */
 
-    'rows' => 100,
+    'per_page' => 100,
 ];
 ```
 
@@ -56,7 +57,7 @@ return [
 php artisan filter:make UsersFilter --model=User
 ```
 
-this will generate `UsersFilter` class at 'app/Http/Filters' directory.
+This will generate a `UsersFilter` class in the ‘app/Http/Filters’ directory. You can then customize this filter according to your application’s needs.
 
 ```php
     <?php
@@ -80,6 +81,18 @@ this will generate `UsersFilter` class at 'app/Http/Filters' directory.
         }
     }
 ```
+
+Certainly! Here’s a rephrased version of your instructions:
+
+If you follow the correct naming convention, you can omit the `--model` option. For instance, if you have a `User` model, you can use the following simplified command:
+
+```bash
+    php artisan filter:make UsersFilter
+```
+
+In this case, since you used the plural form of the model (`User` becomes “Users”), or if you prefer the singular form (UserFilter), the filter command will automatically associate it with the User model.
+
+> Please note that this rule does not apply to combined model names like `UserProduct`. In such cases, please explicitly specify the model using the `--model=UserProduct` option or the shorter `-m"UserProduct"` form.
 
 now you can use the filter by injecting `UserFilter` in your controller like:
 
@@ -139,10 +152,16 @@ public function index(UsersFilter $filter)
 
 ### Include relations
 
-to include relations in the filter class just add option `--relations` to filter make command.
+to include model relations just add option `--relations` to filter make command.
 
 ```bash
-php artisan filter:make UsersFilter --model=User --relations
+php artisan filter:make UsersFilter  --relations
+```
+
+or short form
+
+```bash
+php artisan filter:make UsersFilter -r
 ```
 
 this will generate:
