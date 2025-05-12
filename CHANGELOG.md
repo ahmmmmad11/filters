@@ -2,6 +2,10 @@
 
 All notable changes to `filters` will be documented in this file.
 
+## 0.4.4 - 2025-05-12
+
+pumb deps
+
 ## 0.4.3 - 2024-04-14
 
 - figure out model form filter name (command name argument).
