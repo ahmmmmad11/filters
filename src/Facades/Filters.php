@@ -1,16 +1,16 @@
 <?php
 
-namespace ahmmmmad11\Filters\Facades;
+namespace Ahmmmmad11\Filters\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \ahmmmmad11\Filters\Filter
+ * @see \Ahmmmmad11\Filters\Filter
  */
 class Filters extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
-        return \ahmmmmad11\Filters\Filter::class;
+        return \Ahmmmmad11\Filters\Filter::class;
     }
 }
