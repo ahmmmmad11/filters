@@ -153,10 +153,10 @@ class MakeFilter extends GeneratorCommand
 
     protected function buildFieldsReplacements($replace): array
     {
-        //get model table and then get all table fields
+        // get model table and then get all table fields
         $all_fields = Schema::getColumnListing((new $this->model)->getTable());
 
-        //exclude hidden fields
+        // exclude hidden fields
         $fields = array_diff($all_fields, (new $this->model)->getHidden());
 
         return array_merge($replace, [
