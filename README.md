@@ -150,6 +150,15 @@ public function index(UsersFilter $filter)
 
 > inside `execute` callback function you can use all eloquent methods.
 
+or you can directly chain eloquent methods
+
+```php
+public function index(UsersFilter $filter)
+{
+    return $filter->where('status', 'active')->get();
+}
+```
+
 ### Include relations
 
 to include model relations just add option `--relations` to filter make command.
@@ -202,12 +211,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+if you fond any security vulnerability send a direct email to me alamerahmed00@gmail.com
 
-## Credits
-
-- [Ahmed Mohamed](https://github.com/ahmmmmad11)
-- [All Contributors](../../contributors)
 
 ## License
 
