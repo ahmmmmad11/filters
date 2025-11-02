@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * @mixin QueryBuilder
-**/
+ **/
 abstract class Filter
 {
     use ForwardsCalls;
@@ -67,7 +67,7 @@ abstract class Filter
 
     /**
      * prepare the query if not prepared
-    **/
+     **/
     public function prepare(): void
     {
         if (is_null($this->query)) {
