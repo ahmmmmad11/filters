@@ -6,6 +6,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Spatie\QueryBuilder\QueryBuilder;
 
+/**
+ * @mixin QueryBuilder
+**/
 abstract class Filter
 {
     use ForwardsCalls;
@@ -62,8 +65,23 @@ abstract class Filter
         return $this->query?->get();
     }
 
+    /**
+     * prepare the query if not prepared
+    **/
+    public function prepare(): void
+    {
+        if (is_null($this->query)) {
+            $this->filter();
+        }
+    }
+
+    /**
+     * forward calls to query builder instance
+     **/
     public function __call(string $name, array $arguments)
     {
+        $this->prepare();
+
         $this->forwardCallTo($this->query, $name, $arguments);
 
         return $this;
