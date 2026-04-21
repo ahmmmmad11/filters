@@ -1,7 +1,7 @@
 <?php
 
-use Ahmmmmad11\Filters\Tests\Fixtures\Models\User;
 use Ahmmmmad11\Filters\Tests\Fixtures\Filters\UsersFilterForTest;
+use Ahmmmmad11\Filters\Tests\Fixtures\Models\User;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,8 +24,6 @@ beforeEach(function () {
     config()->set('filters.per_page', 2);
     request()->query->remove('per_page');
 });
-
-
 
 it('loads the query lazily once', function () {
     $filter = new UsersFilterForTest;
@@ -73,4 +71,3 @@ it('does not fallback to filters.per_page when per_page request is missing', fun
     expect($paginator)->not->toBeNull()
         ->and($paginator->perPage())->not->toBe(config('filters.per_page'));
 });
-

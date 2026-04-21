@@ -20,4 +20,3 @@ class User extends Model
         return $this->hasMany(Post::class);
     }
 }
-

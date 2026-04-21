@@ -82,8 +82,3 @@ it('fails for invalid model names', closure: function () {
         '--model' => 'User$',
     ]);
 })->throws(InvalidArgumentException::class, 'Model name contains invalid characters.');
-
-
-
-
-
