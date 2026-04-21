@@ -1,7 +1,8 @@
 <?php
 
-namespace ahmmmmad11\Filters;
+namespace Ahmmmmad11\Filters;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -47,7 +48,7 @@ abstract class Filter
         $this->load();
 
         // if rows not passed get the value from request
-        $rows ??= \request()->get('per_page');
+        $rows ??= request()->per_page;
 
         // fallback to default rows length if rows is null
         $rows ??= config('filters.rows');
@@ -58,7 +59,7 @@ abstract class Filter
     /**
      * get all filtered data
      **/
-    public function get(): \Illuminate\Database\Eloquent\Collection|array|null
+    public function get(): Collection|array|null
     {
         $this->load();
 
