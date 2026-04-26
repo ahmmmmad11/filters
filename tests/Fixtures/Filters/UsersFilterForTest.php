@@ -13,7 +13,7 @@ class UsersFilterForTest extends Filter
     public function filter(): Filter
     {
         $this->filterCalls++;
-        $this->query = QueryBuilder::for(User::query())->allowedFilters(['name', 'status']);
+        $this->query = QueryBuilder::for(User::query())->allowedFilters('name', 'status');
 
         return $this;
     }

@@ -38,18 +38,24 @@ it('executes callback customizations before fetching records', function () {
     $filter = new UsersFilterForTest;
 
     $result = $filter->execute(fn ($query) => $query->where('status', 'active'))->get();
+    $firstUser = $result->first();
+    expect($firstUser)->not->toBeNull();
+    /** @var User $firstUser */
 
-    expect($result)->toHaveCount(1)
-        ->and($result->first()->name)->toBe('Alice');
+    expect($result)->toHaveCount(1);
+    expect($firstUser->getAttribute('name'))->toBe('Alice');
 });
 
 it('forwards eloquent methods and stays chainable', function () {
     $filter = new UsersFilterForTest;
 
     $result = $filter->where('name', 'Alice')->get();
+    $firstUser = $result->first();
+    expect($firstUser)->not->toBeNull();
+    /** @var User $firstUser */
 
-    expect($result)->toHaveCount(1)
-        ->and($result->first()->status)->toBe('active');
+    expect($result)->toHaveCount(1);
+    expect($firstUser->getAttribute('status'))->toBe('active');
 });
 
 it('uses request per_page when paginate rows are not passed', function () {
