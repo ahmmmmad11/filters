@@ -12,10 +12,10 @@ class {{ class }} extends Filter
     {
         $this->query = QueryBuilder::for({{ model }})
             ->allowedFilters(
-                {{ fields }}
+                ...{{ fields }}
             )
             ->allowedIncludes(
-                {{ relations }}
+                ...{{ relations }}
             );
 
         return $this;
