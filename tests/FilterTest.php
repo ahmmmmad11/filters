@@ -41,7 +41,6 @@ it('executes callback customizations before fetching records', function () {
     $firstUser = $result->first();
     expect($firstUser)->not->toBeNull();
     /** @var User $firstUser */
-
     expect($result)->toHaveCount(1);
     expect($firstUser->getAttribute('name'))->toBe('Alice');
 });
@@ -53,7 +52,6 @@ it('forwards eloquent methods and stays chainable', function () {
     $firstUser = $result->first();
     expect($firstUser)->not->toBeNull();
     /** @var User $firstUser */
-
     expect($result)->toHaveCount(1);
     expect($firstUser->getAttribute('status'))->toBe('active');
 });
