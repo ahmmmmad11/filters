@@ -2,6 +2,22 @@
 
 All notable changes to `filters` will be documented in this file.
 
+## V1.0.0 - 2026-04-26
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/13
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/14
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/15
+* V1.0.0 by @ahmmmmad11 in https://github.com/ahmmmmad11/filters/pull/16
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/18
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/21
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/19
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/ahmmmmad11/filters/pull/17
+* V1.0.0 by @ahmmmmad11 in https://github.com/ahmmmmad11/filters/pull/22
+
+**Full Changelog**: https://github.com/ahmmmmad11/filters/compare/0.4.4...V1.0.0
+
 ## 1.0.0 - 2026-04-26
 
 ### Breaking Changes
@@ -13,6 +29,7 @@ All notable changes to `filters` will be documented in this file.
 ### Added
 
 - Full Pest test suite covering positive and negative cases for `Filter` runtime behavior and the `filter:make` artisan command.
+
 
 ---
 
