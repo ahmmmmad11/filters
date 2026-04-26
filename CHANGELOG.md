@@ -2,36 +2,44 @@
 
 All notable changes to `filters` will be documented in this file.
 
+## 1.0.0 - 2026-04-26
+
+### Breaking Changes
+
+- **Dropped support for Laravel 10 and 11.** Laravel 12 and 13 are now required.
+- **Dropped support for PHP < 8.3.** PHP 8.3+ is now required.
+- **Upgraded to `spatie/laravel-query-builder` v7.** The `allowedFilters`, `allowedSorts`, `allowedIncludes`, and `allowedFields` methods now accept variadic arguments instead of a single array. Update all filter classes accordingly — see [UPGRADING.md](UPGRADING.md) for a step-by-step guide.
+
+### Added
+
+- Full Pest test suite covering positive and negative cases for `Filter` runtime behavior and the `filter:make` artisan command.
+
+---
+
 ## 0.4.4 - 2025-05-12
 
-pumb deps
+- Bump dependencies.
 
 ## 0.4.3 - 2024-04-14
 
-- figure out model form filter name (command name argument).
-- shorter `-m` for `--model` option.
-- shorter option `-r` for `--relations` option.
-- enhanced documentation
+- Infer model name from filter name argument (e.g. `UsersFilter` → `User` model).
+- Added short option `-m` as alias for `--model`.
+- Added short option `-r` as alias for `--relations`.
+- Enhanced documentation.
 
 ## 0.3.0 - 2024-03-29
 
-Support Laravel 11
+- Support for Laravel 11.
+
+## 0.2.0 - 2024-03-08
+
+- Renamed `data` property to `query` in the base `Filter` class.
+- Renamed config key `rows` to `per_page`.
+- Enhanced documentation.
 
 ## 0.1.1 - 2024-03-07
 
 First release:
 
-- auto generating filter class with table fields
-- adding relations to the generated filter class by using `--relations` option
-
-## 0.2.0 - 2024-03-08
-
-Restructuring release:
-
-- change `data` prosperity to `query` in  base Filter class.
-- change `rows` in config file to `per_page`.
-- enhance the docs.
-
-## 0.3.0 - 2024-03-29
-
-Release to support Laravel 11
+- Auto-generate filter class with table fields via `filter:make`.
+- Include model relations in the generated class via the `--relations` option.
